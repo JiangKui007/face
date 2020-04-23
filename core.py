@@ -1,12 +1,13 @@
 # _*_ coding:utf-8 _*_
-#__author__ = 'JiangKui'
-#__date__ = '4/23/20 16:43'
+# __author__ = 'JiangKui'
+# __date__ = '4/23/20 16:43'
 import cv2
 import face_recognition
 
-from 读取视频信息 import deal_result_dir
+from os_lib import deal_result_dir
 
-def make_box_loop(video_path, input_movie ,output_movie, length, img_tag):
+
+def make_box_loop(video_path, input_movie, output_movie, length, img_tag):
     # 初始化部分变量
     face_locations = []
     face_encodings = []
