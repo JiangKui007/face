@@ -6,6 +6,9 @@ import face_recognition
 import cv2
 
 from 读取视频信息 import read_video_info, deal_result_dir
+from core import make_box_loop
+
+IMAGE_TAG = True
 
 # 输入视频
 video_path = "头像视频.mov"
@@ -17,41 +20,7 @@ input_movie = cv2.VideoCapture(video_abs_path)
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
 output_movie = cv2.VideoWriter('output2.avi', fourcc, fps, size)  # fps和 size 应与源文件一致
 
-# 初始化部分变量
-face_locations = []
-face_encodings = []
-face_names = []
-frame_number = 0
-
-while True:
-    # Grab a single frame of video
-    ret, frame = input_movie.read()
-    frame_number += 1
-
-    # Quit when the input video file ends
-    if not ret:
-        break
-
-    # Convert the image from BGR color (which OpenCV uses) to RGB color (which face_recognition uses)
-    rgb_frame = frame[:, :, ::-1]
-
-    face_locations = face_recognition.face_locations(rgb_frame)
-    face_encodings = face_recognition.face_encodings(rgb_frame, face_locations)
-
-    # Label the results
-    for (top, right, bottom, left) in face_locations:
-        # Draw a box around the face
-        cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
-
-        # Draw a label with a name below the face
-        # cv2.rectangle(frame, (left, bottom - 25), (right, bottom), (0, 0, 255), cv2.FILLED)
-        # font = cv2.FONT_HERSHEY_DUPLEX
-
-    # print("result/image1_"+str(frame_number)+".jpg")
-    output_movie.write(frame)
-
-    cv2.imwrite(f"{result_dir}/{video_name}_{frame_number}.jpg", frame)  # 保存图片
-    print("Writing frame {} / {}".format(frame_number, length))
+input_movie,output_movie =  make_box_loop(video_path, input_movie ,output_movie, length, IMAGE_TAG)
 
 # All done!
 input_movie.release()

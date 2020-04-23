@@ -3,3 +3,5 @@
 *.avi
 *.mov
 *.mp4
+*.pyc
+.DS_Store
