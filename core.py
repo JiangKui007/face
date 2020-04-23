@@ -13,7 +13,7 @@ def make_box_loop(video_path, input_movie, output_movie, length, img_tag):
     face_encodings = []
     face_names = []
     frame_number = 0
-    video_abs_path, root, result_dir, video_name, ext = deal_result_dir(video_path)
+    video_abs_path, root, result_dir, video_name, _, ext = deal_result_dir(video_path)
 
     while True:
         # Grab a single frame of video
